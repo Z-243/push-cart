@@ -1,6 +1,7 @@
 "use client";
 
 import { useProducts } from "@/context/ProductContext";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -86,17 +87,19 @@ export default function CartPage() {
           if (!itemData || !itemData.name) return null;
 
           const imgName = itemData.name.replaceAll(" ", "_");
-          const imgUrl = "low_res/" + imgName + ".jpeg";
+          const imgUrl = "/low_res/" + imgName + ".jpeg";
 
           return (
             <div
               key={itemIndex}
               className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 p-3 sm:p-4 border border-gray-200 rounded-xl shadow-sm bg-white"
             >
-              <img
+              <Image
                 src={imgUrl}
                 alt={`${imgName}-img`}
-                className="h-full w-24 h-30 object-cover rounded-md"
+                width={96}
+                height={120}
+                className="object-cover rounded-md"
               />
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{itemData.name}</h3>

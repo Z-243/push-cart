@@ -22,12 +22,12 @@ export default function Error(props) {
         >
           Reset
         </button>
-        <a
+        <Link
           href="/"
           className="bg-neutral-800 text-white px-5 py-2 rounded-md font-medium hover:opacity-80 transition-opacity cursor-pointer"
         >
           Home
-        </a>
+        </Link>
       </div>
     </div>
   );

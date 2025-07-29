@@ -23,12 +23,12 @@ export default function StatusPage() {
           </h2>
         </>
       )}
-      <a
+      <Link
         href="/"
         className="bg-neutral-800 text-white px-6 py-2 rounded-md font-medium hover:opacity-80 transition-opacity"
       >
         Continue Shopping
-      </a>
+      </Link>
     </div>
   );
 }

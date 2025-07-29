@@ -115,9 +115,9 @@ export default function RootLayout({ children }) {
                 <div className="md:col-span-2 flex flex-col gap-4 pt-8 border-t border-gray-200">
                   <p className="text-sm text-gray-500">
                     Ⓒ{" "}
-                    <a href="/" className="underline hover:text-gray-800">
+                    <Link href="/" className="underline hover:text-gray-800">
                       PushCart
-                    </a>{" "}
+                    </Link>{" "}
                     2025 — Built with Next.js
                   </p>
                   <div className="flex items-center gap-4 text-xl text-gray-600">
