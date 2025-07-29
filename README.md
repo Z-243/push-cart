@@ -3,4 +3,4 @@
 
 ## 🚀 Live Demo
 
-👉 [PushCart](https://a-cool-pokedex.netlify.app/)
+👉 [PushCart](https://main.d3tey1bstzltb.amplifyapp.com/)
