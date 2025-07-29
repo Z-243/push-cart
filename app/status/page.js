@@ -1,5 +1,5 @@
+import StatusContent from "@/components/StatusContent";
 import { Suspense } from "react";
-import StatusContent from "./StatusContent";
 
 export default function StatusPage() {
   return (
