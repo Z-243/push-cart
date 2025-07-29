@@ -1,33 +1,35 @@
 import ImageBanner from "@/components/ImageBanner";
 import Products from "@/components/Products";
+import { fetchProductsData } from "./lib/products";
 
-export const dynamic = "force-dynamic";
-
-export async function getProducts() {
-  const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-  try {
-    const response = await fetch(baseURL + "/api/products");
-    const products = await response.json();
-    return products;
-  } catch (err) {
-    console.error("Failed to fetch products:", err);
-    return { items: [] };
-  }
-}
+// export async function getProducts() {
+//   const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+//   try {
+//     const response = await fetch(baseURL + "/api/products");
+//     const products = await response.json();
+//     return products;
+//   } catch (err) {
+//     console.error("Failed to fetch products:", err);
+//     return { items: [] };
+//   }
+// }
 
 export default async function Home() {
-  const products = await getProducts();
+  const data = await fetchProductsData();
 
-  let planners = [];
-  let stickers = [];
+  const planners = data.items.filter((item) => item.name.includes("Planner"));
+  const stickers = data.items.filter((item) => !item.name.includes("Planner"));
 
-  for (let product of products.items) {
-    if (product.name.trim().includes("Planner")) {
-      planners.push(product);
-      continue;
-    }
-    stickers.push(product);
-  }
+  // let planners = [];
+  // let stickers = [];
+
+  // for (let product of products.items) {
+  //   if (product.name.trim().includes("Planner")) {
+  //     planners.push(product);
+  //     continue;
+  //   }
+  //   stickers.push(product);
+  // }
 
   return (
     <>
