@@ -1,15 +1,9 @@
-import "../../../envConfig.js";
-
 const DODO_SECRET_KEY = process.env.DODO_SECRET_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function POST(request) {
   try {
     const { product_cart, customer, billing } = await request.json();
-
-    // Format line items for Dodo if necessary
-    // Dodo expects line_items to be passed with product_id & quantity
-    // Adjust below if Dodo uses a different schema
 
     const response = await fetch("https://test.dodopayments.com/payments", {
       method: "POST",
