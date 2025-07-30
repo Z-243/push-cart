@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 const DODO_SECRET_KEY = process.env.DODO_SECRET_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
