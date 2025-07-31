@@ -3,9 +3,9 @@ export const runtime = "nodejs";
 const DODO_SECRET_KEY = process.env.DODO_SECRET_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-console.log("✅ DODO_SECRET_KEY present?", Boolean(DODO_SECRET_KEY));
-
 export async function POST(request) {
+  console.log("✅ DODO_SECRET_KEY present?", Boolean(DODO_SECRET_KEY));
+
   try {
     if (!DODO_SECRET_KEY) {
       console.error("❌ DODO_SECRET_KEY is missing");
