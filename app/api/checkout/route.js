@@ -4,7 +4,6 @@ const DODO_SECRET_KEY = process.env.DODO_SECRET_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 console.log("✅ In route.js API");
-console.log("✅ process.env.DODO_SECRET_KEY:", process.env.DODO_SECRET_KEY);
 console.log(
   "✅ DODO_SECRET_KEY defined?",
   Boolean(process.env.DODO_SECRET_KEY)
