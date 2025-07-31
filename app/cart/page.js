@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { createCheckoutSession } from "../lib/checkout";
 
 export default function CartPage() {
   const { cart, handleIncrementProduct } = useProducts();
@@ -13,63 +14,21 @@ export default function CartPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  async function createCheckout() {
+  async function handleCheckout() {
     try {
       setIsLoading(true);
       setError("");
+
       if (!email || !email.includes("@")) {
         setError("Please enter a valid email address.");
         return;
       }
 
-      const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
-      const lineItems = Object.keys(cart).map((key) => {
-        const item = cart[key];
-        return {
-          product_id: item.product_id,
-          quantity: item.quantity,
-          // amount: Number(item.price) || 0,
-        };
-      });
-
-      if (lineItems.length === 0) {
-        console.warn("Cart is empty, no checkout initiated.");
-        return;
-      }
-
-      const response = await fetch(`${baseURL}/api/checkout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          product_cart: lineItems,
-          customer: {
-            email: email || "",
-            name: "Anonymous",
-          },
-          billing: {
-            city: "N/A",
-            country: "US",
-            state: "N/A",
-            street: "N/A",
-            zipcode: "00000",
-          },
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.url) {
-        // Redirect to Dodo checkout
-        router.push(data.url);
-      } else {
-        console.error("Checkout error:", data.error || "No URL returned.");
-        setError("Failed to initiate checkout.");
-      }
+      const url = await createCheckoutSession({ cart, email });
+      router.push(url);
     } catch (err) {
-      console.error("Error creating checkout", err.message);
+      console.error("Checkout failed:", err.message);
+      setError(err.message || "Checkout failed");
     } finally {
       setIsLoading(false);
     }
@@ -156,7 +115,7 @@ export default function CartPage() {
           </button>
         </Link>
         <button
-          onClick={createCheckout}
+          onClick={handleCheckout}
           disabled={isLoading}
           className="px-6 py-2 bg-neutral-800 text-white rounded-lg hover:opacity-60 transition cursor-pointer"
         >
