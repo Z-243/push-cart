@@ -5,14 +5,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function POST(request) {
   try {
-    if (!DODO_SECRET_KEY) {
-      console.error("❌ DODO_SECRET_KEY is missing");
-      return new Response(
-        JSON.stringify({ error: "Missing DODO secret key" }),
-        { status: 500 }
-      );
-    }
-
     const { product_cart, customer, billing } = await request.json();
 
     const response = await fetch("https://test.dodopayments.com/payments", {
